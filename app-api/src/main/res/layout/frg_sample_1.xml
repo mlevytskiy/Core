@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="com.app.api.viewmodel.SampleViewModel1" />
+    </data>
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_marginTop="100dp">
+
+            <EditText
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:text="@={viewModel.userId}" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Check registration"
+                android:onClick="@{() -> viewModel.checkRegistration()}" />
+
+            <EditText
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:text="@={viewModel.password}" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Registration"
+                android:onClick="@{() -> viewModel.registration()}" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Login"
+                android:onClick="@{() -> viewModel.login()}" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Get apps"
+                android:onClick="@{() -> viewModel.getApps()}" />
+
+            <EditText
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:text="@={viewModel.appsPackages}" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Add app"
+                android:onClick="@{() -> viewModel.addApp()}" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Remove app"
+                android:onClick="@{() -> viewModel.removeApp()}" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</layout>
