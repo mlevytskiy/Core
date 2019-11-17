@@ -1,10 +1,11 @@
-package com.core.core_adapters
+package com.core.sample
 
 import android.graphics.Typeface
 import android.graphics.drawable.AnimationDrawable
 import android.graphics.drawable.Drawable
 import android.os.Build
 import android.text.Html
+import android.text.Spannable
 import android.text.TextUtils
 import android.text.method.TransformationMethod
 import android.view.View
@@ -99,6 +100,12 @@ object DataBindingAdapters {
     }
 
     @JvmStatic
+    @BindingAdapter("app:textSpannable")
+    fun setTextSpannable(textView: TextView, textSpannable: Spannable) {
+        textView.text = textSpannable
+    }
+
+    @JvmStatic
     @BindingAdapter("textHtml")
     fun setTextHtml(textView: TextView, text: String) {
         if (!TextUtils.isEmpty(text)) {
@@ -129,17 +136,17 @@ object DataBindingAdapters {
         }
     }
 
-    @JvmStatic
-    @BindingAdapter("requestFocus")
-    fun requestFocus(et: EditText, request: Boolean) {
-        if (request) {
-            et.post {
-                et.requestFocus()
-                et.setSelection(et.text.length)
-                et.showKeyboard()
-            }
-        }
-    }
+//    @JvmStatic
+//    @BindingAdapter("requestFocus")
+//    fun requestFocus(et: EditText, request: Boolean) {
+//        if (request) {
+//            et.post {
+//                et.requestFocus()
+//                et.setSelection(et.text.length)
+//                et.showKeyboard()
+//            }
+//        }
+//    }
 
     @JvmStatic
     @BindingAdapter("disableTouch")

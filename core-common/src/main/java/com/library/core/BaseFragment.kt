@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.databinding.DataBindingUtil
@@ -14,8 +15,12 @@ import androidx.navigation.NavController
 import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
 import dagger.android.support.DaggerFragment
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.EventBusException
 import javax.inject.Inject
 import kotlin.reflect.KClass
+
+
 
 abstract class BaseFragment<B : ViewDataBinding, VM : BaseViewModel>: DaggerFragment() {
 
@@ -49,14 +54,18 @@ abstract class BaseFragment<B : ViewDataBinding, VM : BaseViewModel>: DaggerFrag
     }
 
     private fun registerEventBus() {
-//        if (!EventBus.getDefault().isRegistered(this)) {
-//            EventBus.getDefault().register(this)
-////            log("event bus registered for: " + this::class.simpleName)
-//        }
+        if (!EventBus.getDefault().isRegistered(this)) {
+            try {
+                EventBus.getDefault().register(this)
+            } catch (exception : EventBusException) {
+                //ignore
+            }
+//            log("event bus registered for: " + this::class.simpleName)
+        }
     }
 
     private fun unregisterEventBus() {
-//        EventBus.getDefault().unregister(this)
+        EventBus.getDefault().unregister(this)
 //        log("event bus unregistered for: " + this::class.simpleName)
     }
 
@@ -82,6 +91,8 @@ abstract class BaseFragment<B : ViewDataBinding, VM : BaseViewModel>: DaggerFrag
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        requireActivity().getWindow()
+            .setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN or WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN)
         binding = DataBindingUtil.inflate(inflater, getLayoutRes(), container, false)
         setViewModelInBinding(binding!!, viewModel!!)
         getToolbar()?.let {

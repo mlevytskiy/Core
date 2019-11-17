@@ -8,4 +8,7 @@
 
     <color name="gray1">#7f54B6CB</color>
     <color name="gray2">#ffffffff</color>
+    <color name="black_alpha_50">#7F000000</color>
+    <color name="blue">#FF0057B8</color>
+    <color name="endeavour_alpha_50">#7F003770</color>
 </resources>
