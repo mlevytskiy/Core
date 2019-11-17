@@ -1,4 +1,7 @@
 include ':core-common-sample', ':core-common', ':core-memory-sample', ':core-adapters', ':app-appsview-sample', ':app-bottom-tabs',
-        ':app-get-all-apps', ':app-app-info-view', ':app-api'
+        ':app-get-all-apps', ':app-app-info-view', ':app-api', ':app-tagspannable'
+
+//include ':core-common', ':core-adapters', ':app-bottom-tabs',
+//        ':app-get-all-apps', ':app-app-info-view'
 
 rootProject.name='Core'
