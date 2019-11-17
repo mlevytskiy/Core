@@ -12,6 +12,8 @@ import com.core.sample.App
 import com.core.sample.BuildConfig
 import com.core.sample.MainActivity
 import com.core.sample.fragment.*
+import com.core.sample.util.ColorRes
+import com.core.sample.util.StringRes
 import com.core.sample.viewmodel.*
 import com.library.core.ViewModelFactory
 import dagger.BindsInstance
@@ -64,6 +66,13 @@ class AppModule {
                 providers: MutableMap<Class<out ViewModel>, @JvmSuppressWildcards Provider<ViewModel>>
         ): ViewModelProvider.Factory = ViewModelFactory(providers)
     }
+
+    @Provides
+    fun provideStringRes(context: Context) = StringRes(context.resources)
+
+    @Provides
+    fun provideColorRes(context: Context) = ColorRes(context)
+
 }
 
 @Module

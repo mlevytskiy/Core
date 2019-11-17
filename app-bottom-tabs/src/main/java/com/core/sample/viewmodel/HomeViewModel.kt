@@ -5,12 +5,13 @@ import android.text.SpannableString
 import android.text.Spanned
 import android.text.style.BackgroundColorSpan
 import androidx.databinding.ObservableField
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import com.app.api.api.*
 import com.core.sample.ShowPickOfAppsDialog
 import com.core.sample.ShowPickedApps
-import com.core.sample.fragment.SampleFragment1Directions
+import com.core.sample.util.ColorRes
+import com.core.sample.util.HomeTitle
+import com.core.sample.util.StringRes
 import com.library.core.BaseViewModel
 import com.library.core.di.ViewModelKey
 import dagger.Module
@@ -26,7 +27,9 @@ class HomeModule {
     @Provides
     @IntoMap
     @ViewModelKey(HomeViewModel::class)
-    fun bindViewModelKey(wumfApi : WumfApi, headerInterceptor: HeaderInterceptor): ViewModel = HomeViewModel(wumfApi, headerInterceptor)
+    fun bindViewModelKey(wumfApi : WumfApi, headerInterceptor: HeaderInterceptor,
+                         stringRes: StringRes, colorRes: ColorRes): ViewModel
+            = HomeViewModel(wumfApi, headerInterceptor, stringRes, colorRes)
 }
 
 private const val IN_THE_WORLD = 0
@@ -34,47 +37,33 @@ private const val IN_COUNTRY = 1
 private const val AMONG_FRIENDS = 2
 
 class HomeViewModel @Inject constructor(private val wumfApi : WumfApi,
-                                        private val headerInterceptor: HeaderInterceptor
-): BaseViewModel() {
+                                        private val headerInterceptor: HeaderInterceptor,
+                                        stringRes: StringRes, colorRes: ColorRes): BaseViewModel() {
 
-    val span = ObservableField(SpannableString("Find the best apps in the world"))//AndroidTagBadgeBuilder(SpannableStringBuilder("Find the best apps in the world"), 40, "in the world").tags
-    private var textSuffix = "Find the best apps\n"
-    private var highlightText = "in the world"
-    private var pickedTypeOfApps = IN_THE_WORLD
-
-    init {
-        updateText()
-    }
+    val span = HomeTitle(stringRes, colorRes)
 
     fun handleTestError() {
         handleException(Exception("Some error"))
     }
 
-    private fun updateText() {
-        val spannable = SpannableString(textSuffix + highlightText)
-        spannable.setSpan(BackgroundColorSpan(Color.GREEN), textSuffix.length, textSuffix.length + highlightText.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
-        span.set(spannable)
-    }
-
     fun showPickTypeOfAppsDialog() {
-        postEvent(ShowPickOfAppsDialog(pickedTypeOfApps))
+        postEvent(ShowPickOfAppsDialog(span.type))
     }
 
-    fun pickedTypeOfApps(str: String, position: Int) {
+    fun pickedTypeOfApps(position: Int) {
         when (position) {
             IN_THE_WORLD -> {
+                span.type = HomeTitle.Type.IN_THE_WORLD
                 getAllWorldApps()
             }
             IN_COUNTRY -> {
+                span.type = HomeTitle.Type.IN_COUNTRY
 
             }
             AMONG_FRIENDS -> {
-
+                span.type = HomeTitle.Type.AMONG_FRIENDS
             }
         }
-        pickedTypeOfApps = position
-        highlightText = str
-        updateText()
 
     }
 

@@ -47,8 +47,8 @@ android {
             proguardFiles '../proguard-rules.pro'
         }
         debug {
-            minifyEnabled = true
-            shrinkResources true
+            minifyEnabled = false
+            shrinkResources false
             proguardFiles '../proguard-rules.pro'
         }
     }

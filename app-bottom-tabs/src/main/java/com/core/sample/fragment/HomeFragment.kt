@@ -23,9 +23,9 @@ class HomeFragment : BaseFragment<FrgHomeBinding, HomeViewModel>() {
 
     @Subscribe
     fun onEvent(event: ShowPickOfAppsDialog) {
-        showSimpleDialog(requireContext(), R.array.type_of_apps, event.selected,
+        showSimpleDialog(requireContext(), R.array.type_of_apps, event.type.ordinal,
             { array, pos ->
-                viewModel?.pickedTypeOfApps(array[pos], pos)
+                viewModel?.pickedTypeOfApps(pos)
             }, {
                 it.dismiss()
             })

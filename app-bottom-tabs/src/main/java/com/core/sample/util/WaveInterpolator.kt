@@ -1,4 +1,4 @@
-package com.core.sample
+package com.core.sample.util
 
 import android.view.animation.Interpolator
 
