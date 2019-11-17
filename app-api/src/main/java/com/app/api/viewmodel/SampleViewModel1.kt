@@ -44,7 +44,9 @@ class SampleViewModel1 @Inject constructor(private val wumfApi : WumfApi,
     fun registration() {
         startBgJob {
             callRetrofit(
-                call = wumfApi.registration(RegistrationRequest(userId.get()!!, "", "${password.get().hashCode()}")),
+                call = wumfApi.registration(RegistrationRequest(userId.get()!!, "",
+                    "${password.get().hashCode()}", "displayName", "ua"
+                    )),
                 result = { response ->
                     response?.token?.let {
                         headerInterceptor.updateToken(it)
@@ -92,6 +94,15 @@ class SampleViewModel1 @Inject constructor(private val wumfApi : WumfApi,
             callRetrofit(
                 call = wumfApi.removeApp(RemoveAppRequest(appsPackages.get()!!)),
                 result = { response -> "apps=${response?.apps?.getNullIfEmpty()?:"have no apps"}" }
+            )
+        }
+    }
+
+    fun getAllWorldApps() {
+        startBgJob {
+            callRetrofit(
+                call = wumfApi.getNotMyApps(GetNotMyAppsRequest(allWorld = true, friends= emptyList())),
+                result = { response -> "appsIsNotEmpty=${response?.apps?.isNotEmpty()}" }
             )
         }
     }

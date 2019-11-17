@@ -11,17 +11,16 @@
             type="com.app.api.viewmodel.SampleViewModel1" />
     </data>
 
-
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
+            android:layout_height="match_parent"
+            android:layout_marginTop="100dp"
             android:gravity="center"
-            android:layout_marginTop="100dp">
+            android:orientation="vertical">
 
             <EditText
                 android:layout_width="200dp"
@@ -32,8 +31,8 @@
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Check registration"
-                android:onClick="@{() -> viewModel.checkRegistration()}" />
+                android:onClick="@{() -> viewModel.checkRegistration()}"
+                android:text="Check registration" />
 
             <EditText
                 android:layout_width="200dp"
@@ -43,20 +42,14 @@
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Registration"
-                android:onClick="@{() -> viewModel.registration()}" />
+                android:onClick="@{() -> viewModel.registration()}"
+                android:text="Registration" />
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Login"
-                android:onClick="@{() -> viewModel.login()}" />
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Get apps"
-                android:onClick="@{() -> viewModel.getApps()}" />
+                android:onClick="@{() -> viewModel.login()}"
+                android:text="Login" />
 
             <EditText
                 android:layout_width="200dp"
@@ -66,14 +59,26 @@
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Add app"
-                android:onClick="@{() -> viewModel.addApp()}" />
+                android:onClick="@{() -> viewModel.getApps()}"
+                android:text="Get apps" />
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Remove app"
-                android:onClick="@{() -> viewModel.removeApp()}" />
+                android:onClick="@{() -> viewModel.addApp()}"
+                android:text="Add app" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="@{() -> viewModel.removeApp()}"
+                android:text="Remove app" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="@{() -> viewModel.getAllWorldApps()}"
+                android:text="Get all apps(for all users)" />
 
         </LinearLayout>
 
