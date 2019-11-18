@@ -7,9 +7,7 @@ import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.util.DisplayMetrics
 import android.graphics.Canvas
-import java.io.File
-import java.io.FileOutputStream
-import java.io.IOException
+import java.io.*
 
 
 private val ICON_SIZE_LDPI = 36
@@ -44,6 +42,13 @@ object Util {
         return fileGenerator?.pngImage(packageName, mainActivityName) ?:run {
             fileGenerator = FileGenerator(file)
             return@run fileGenerator!!.pngImage(packageName, mainActivityName)
+        }
+    }
+
+    fun getFile(packageName: String, file: File): File {
+        return fileGenerator?.generate(packageName, "json") ?:run {
+            fileGenerator = FileGenerator(file)
+            return@run fileGenerator!!.generate(packageName, "json")
         }
     }
 
@@ -110,8 +115,10 @@ object Util {
     private class FileGenerator(private val fileDir: File) {
 
         fun pngImage(packageName: String, mainActivityName: String): File {
-            return File(fileDir, "$packageName$mainActivityName.png")
+            return generate("$packageName$mainActivityName", "png")
         }
+
+        fun generate(str: String, extension: String)= File(fileDir, "$str.$extension")
 
     }
 

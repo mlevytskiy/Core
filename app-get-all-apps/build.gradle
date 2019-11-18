@@ -35,4 +35,6 @@ dependencies {
     implementation "io.objectbox:objectbox-kotlin:2.4.1"
 
     implementation 'org.jsoup:jsoup:1.12.1'
+
+    implementation 'com.esotericsoftware:kryo-shaded:4.0.2'
 }
