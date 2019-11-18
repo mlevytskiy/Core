@@ -4,50 +4,57 @@
   "_note3": "If you have VCS merge conflicts, you must resolve them according to ObjectBox docs.",
   "entities": [
     {
-      "id": "1:8354944930002367406",
-      "lastPropertyId": "5:8867121448221206999",
-      "name": "UserSystemInfo",
+      "id": "2:6389931387336765968",
+      "lastPropertyId": "2:3357762248180015555",
+      "name": "SystemInfo",
       "properties": [
         {
-          "id": "1:3407374304262136675",
+          "id": "1:3456504308899721356",
           "name": "id",
           "type": 6,
-          "flags": 1
+          "flags": 129
         },
         {
-          "id": "2:2148330754907814319",
-          "name": "language",
-          "type": 9
-        },
-        {
-          "id": "3:7751206407523650006",
-          "name": "installProvider",
-          "type": 9
-        },
-        {
-          "id": "4:3317970761505450558",
-          "name": "phoneInfo",
-          "type": 9
-        },
-        {
-          "id": "5:8867121448221206999",
-          "name": "installTime",
-          "type": 6,
+          "id": "2:3357762248180015555",
+          "name": "statusBarHeight",
+          "type": 5,
           "flags": 4
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "3:6307433440911717266",
+      "lastPropertyId": "1:6318278955875994059",
+      "name": "ResponseCache",
+      "properties": [
+        {
+          "id": "1:6318278955875994059",
+          "name": "id",
+          "type": 6,
+          "flags": 129
         }
       ],
       "relations": []
     }
   ],
-  "lastEntityId": "1:8354944930002367406",
+  "lastEntityId": "3:6307433440911717266",
   "lastIndexId": "0:0",
   "lastRelationId": "0:0",
   "lastSequenceId": "0:0",
   "modelVersion": 5,
   "modelVersionParserMinimum": 5,
-  "retiredEntityUids": [],
+  "retiredEntityUids": [
+    8354944930002367406
+  ],
   "retiredIndexUids": [],
-  "retiredPropertyUids": [],
+  "retiredPropertyUids": [
+    3407374304262136675,
+    2148330754907814319,
+    7751206407523650006,
+    3317970761505450558,
+    8867121448221206999
+  ],
   "retiredRelationUids": [],
   "version": 1
 }

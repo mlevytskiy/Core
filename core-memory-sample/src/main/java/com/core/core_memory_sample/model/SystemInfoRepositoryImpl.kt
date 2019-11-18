@@ -4,8 +4,7 @@ import android.content.Context
 import io.objectbox.Box
 import io.objectbox.kotlin.query
 
-class SystemInfoRepositoryImpl(context: Context):
-    SystemInfoRepository {
+class SystemInfoRepositoryImpl(context: Context): SystemInfoRepository {
 
     private val systemInfoBox: Box<SystemInfo>
 
