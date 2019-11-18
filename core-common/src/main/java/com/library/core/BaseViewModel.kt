@@ -10,9 +10,10 @@ import com.library.core.event.ShowToastEvent
 import kotlinx.coroutines.*
 import org.greenrobot.eventbus.EventBus
 import java.lang.Exception
+import java.lang.ref.WeakReference
 import kotlin.reflect.KClass
 
-abstract class BaseViewModel: ViewModel(), Observable {
+abstract class BaseViewModel<B : ViewDataBinding>: ViewModel(), Observable, HoldUI<B> {
 
     @Transient
     private var callbacks: PropertyChangeRegistry? = null
@@ -21,9 +22,29 @@ abstract class BaseViewModel: ViewModel(), Observable {
     @Transient
     private var scope = CoroutineScope(Dispatchers.IO + supervisor)
 
+    private var weakReferenceUI: WeakReference<B>? = null
+
+    override fun setUI(binding: B?) {
+        binding?.let {
+            weakReferenceUI = WeakReference(it)
+        }
+    }
+
+    override fun getUI(): WeakReference<B>? {
+        return weakReferenceUI
+    }
+
+    override fun needHoldUI(): Boolean {
+        return false
+    }
+
     override fun onCleared() {
         super.onCleared()
         cancelBgJobs()
+    }
+
+    open fun shouldHoldUI(): Boolean {
+        return false
     }
 
     override fun removeOnPropertyChangedCallback(callback: Observable.OnPropertyChangedCallback?) {
@@ -35,8 +56,8 @@ abstract class BaseViewModel: ViewModel(), Observable {
         callbacks?.remove(callback)
     }
 
-    fun showToast(message: String, senderClass: KClass<out BaseViewModel>) {
-        postEvent(ShowToastEvent(message, senderClass))
+    fun showToast(message: String) {
+        postEvent(ShowToastEvent(message))
     }
 
     override fun addOnPropertyChangedCallback(callback: Observable.OnPropertyChangedCallback?) {
@@ -73,12 +94,12 @@ abstract class BaseViewModel: ViewModel(), Observable {
         supervisor.cancelChildren()
     }
 
-    fun navigate(nav: NavDirections, senderClass: KClass<out BaseViewModel>) {
-        postEvent(FragmentNavigationDirection(nav, senderClass))
+    fun navigate(nav: NavDirections) {
+        postEvent(FragmentNavigationDirection(nav))
     }
 
-    fun popTo(id: Int, inclusive: Boolean = false, senderClass: KClass<out BaseViewModel>) {
-        postEvent(PopBackTo(id, inclusive, senderClass))
+    fun popTo(id: Int, inclusive: Boolean = false) {
+        postEvent(PopBackTo(id, inclusive))
     }
 
     fun postEvent(event: BaseEvent) {

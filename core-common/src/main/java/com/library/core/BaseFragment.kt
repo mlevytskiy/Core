@@ -22,7 +22,7 @@ import kotlin.reflect.KClass
 
 
 
-abstract class BaseFragment<B : ViewDataBinding, VM : BaseViewModel>: DaggerFragment() {
+abstract class BaseFragment<B : ViewDataBinding, VM : BaseViewModel<B>>: DaggerFragment() {
 
     @JvmField @Inject
     var viewModelFactory: ViewModelProvider.Factory? = null
@@ -93,7 +93,12 @@ abstract class BaseFragment<B : ViewDataBinding, VM : BaseViewModel>: DaggerFrag
     ): View? {
         requireActivity().getWindow()
             .setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN or WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN)
-        binding = DataBindingUtil.inflate(inflater, getLayoutRes(), container, false)
+
+        binding = viewModel?.getUI()?.get() ?: DataBindingUtil.inflate(inflater, getLayoutRes(), container, false)
+        if (viewModel?.needHoldUI() ?: false) {
+            viewModel?.setUI(binding)
+        }
+
         setViewModelInBinding(binding!!, viewModel!!)
         getToolbar()?.let {
             (activity as AppCompatActivity).setSupportActionBar(it)

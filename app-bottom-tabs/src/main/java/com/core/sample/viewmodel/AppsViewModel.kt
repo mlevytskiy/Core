@@ -1,6 +1,7 @@
 package com.core.sample.viewmodel
 
 import androidx.lifecycle.ViewModel
+import com.core.sample.databinding.FrgAppsBinding
 import com.core.sample.fragment.SampleFragment1Directions
 import com.library.core.BaseViewModel
 import com.library.core.di.ViewModelKey
@@ -18,18 +19,10 @@ class AppsModule {
     fun bindViewModelKey(): ViewModel = AppsViewModel()
 }
 
-class AppsViewModel @Inject constructor(): BaseViewModel() {
+class AppsViewModel @Inject constructor(): BaseViewModel<FrgAppsBinding>() {
 
     fun handleTestError() {
         handleException(Exception("Some error"))
-    }
-
-    fun nextScreen() {
-        navigate(SampleFragment1Directions.actionSample1ToSample2(), SampleViewModel1::class)
-    }
-
-    fun prevScreen() {
-        //do nothing
     }
 
     override fun handleException(e: Exception) {

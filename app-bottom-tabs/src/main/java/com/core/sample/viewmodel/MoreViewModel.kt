@@ -1,6 +1,7 @@
 package com.core.sample.viewmodel
 
 import androidx.lifecycle.ViewModel
+import com.core.sample.databinding.FrgMoreBinding
 import com.core.sample.fragment.SampleFragment1Directions
 import com.library.core.BaseViewModel
 import com.library.core.di.ViewModelKey
@@ -18,7 +19,7 @@ class MoreModule {
     fun bindViewModelKey(): ViewModel = MoreViewModel()
 }
 
-class MoreViewModel @Inject constructor(): BaseViewModel() {
+class MoreViewModel @Inject constructor(): BaseViewModel<FrgMoreBinding>() {
 
     fun handleTestError() {
         handleException(Exception("Some error"))

@@ -1,6 +1,7 @@
 package com.core.sample.viewmodel
 
 import androidx.lifecycle.ViewModel
+import com.core.sample.databinding.FrgSample1Binding
 import com.core.sample.fragment.SampleFragment1
 import com.core.sample.fragment.SampleFragment1Directions
 import com.library.core.BaseViewModel
@@ -20,7 +21,7 @@ class SampleModule1 {
     fun bindViewModelKey(): ViewModel = SampleViewModel1()
 }
 
-class SampleViewModel1 @Inject constructor(): BaseViewModel() {
+class SampleViewModel1 @Inject constructor(): BaseViewModel<FrgSample1Binding>() {
 
     val str = "fragment 1"
 
@@ -29,7 +30,7 @@ class SampleViewModel1 @Inject constructor(): BaseViewModel() {
     }
 
     fun nextScreen() {
-        navigate(SampleFragment1Directions.actionSample1ToSample2(), SampleViewModel1::class)
+        navigate(SampleFragment1Directions.actionSample1ToSample2())
     }
 
     fun prevScreen() {

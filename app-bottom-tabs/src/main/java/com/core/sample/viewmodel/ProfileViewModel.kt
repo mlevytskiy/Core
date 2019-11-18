@@ -1,6 +1,7 @@
 package com.core.sample.viewmodel
 
 import androidx.lifecycle.ViewModel
+import com.core.sample.databinding.FrgProfileBinding
 import com.core.sample.fragment.SampleFragment1Directions
 import com.library.core.BaseViewModel
 import com.library.core.di.ViewModelKey
@@ -18,7 +19,7 @@ class ProfileModule {
     fun bindViewModelKey(): ViewModel = ProfileViewModel()
 }
 
-class ProfileViewModel @Inject constructor(): BaseViewModel() {
+class ProfileViewModel @Inject constructor(): BaseViewModel<FrgProfileBinding>() {
 
     fun handleTestError() {
         handleException(Exception("Some error"))

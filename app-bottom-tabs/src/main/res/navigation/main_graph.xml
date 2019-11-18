@@ -21,12 +21,9 @@
         android:name="com.core.sample.fragment.ProfileFragment"
         tools:layout="@layout/frg_profile" />
 
-
     <fragment android:id="@+id/more"
         android:name="com.core.sample.fragment.MoreFragment"
         tools:layout="@layout/frg_more" />
-
-
 
     <fragment android:id="@+id/sample1"
         android:name="com.core.sample.fragment.SampleFragment1"

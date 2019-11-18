@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModel
 import com.app.api.api.*
 import com.core.sample.ShowPickOfAppsDialog
 import com.core.sample.ShowPickedApps
+import com.core.sample.databinding.FrgHomeBinding
 import com.core.sample.util.ColorRes
 import com.core.sample.util.HomeTitle
 import com.core.sample.util.StringRes
@@ -38,7 +39,7 @@ private const val AMONG_FRIENDS = 2
 
 class HomeViewModel @Inject constructor(private val wumfApi : WumfApi,
                                         private val headerInterceptor: HeaderInterceptor,
-                                        stringRes: StringRes, colorRes: ColorRes): BaseViewModel() {
+                                        stringRes: StringRes, colorRes: ColorRes): BaseViewModel<FrgHomeBinding>() {
 
     val span = HomeTitle(stringRes, colorRes)
 
@@ -67,6 +68,10 @@ class HomeViewModel @Inject constructor(private val wumfApi : WumfApi,
 
     }
 
+    override fun needHoldUI(): Boolean {
+        return true
+    }
+
     override fun handleException(e: Exception) {
 
     }
@@ -88,7 +93,7 @@ class HomeViewModel @Inject constructor(private val wumfApi : WumfApi,
             val appsStr = prepareAppsForAdapter(it.apps)
             postEvent(ShowPickedApps(appsStr))
         } ?: kotlin.run {
-            showToast("response is null", HomeViewModel::class)
+            showToast("response is null")
         }
     }
 
@@ -102,9 +107,9 @@ class HomeViewModel @Inject constructor(private val wumfApi : WumfApi,
 
     private fun <T> callRetrofit(call: Call<T>, result: (T?)->(String)) {
         val response = executeRetrofit(call=call,
-            generalError = { e -> showToast("error=" + e.message, HomeViewModel::class) })
+            generalError = { e -> showToast("error=" + e.message) })
         response?.let{
-            showToast(result.invoke(it), HomeViewModel::class)
+            showToast(result.invoke(it))
         }
     }
 

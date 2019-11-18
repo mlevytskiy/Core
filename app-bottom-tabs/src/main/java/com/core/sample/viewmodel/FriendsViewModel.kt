@@ -1,6 +1,7 @@
 package com.core.sample.viewmodel
 
 import androidx.lifecycle.ViewModel
+import com.core.sample.databinding.FrgFriendsBinding
 import com.core.sample.fragment.SampleFragment1Directions
 import com.library.core.BaseViewModel
 import com.library.core.di.ViewModelKey
@@ -18,7 +19,7 @@ class FriendsModule {
     fun bindViewModelKey(): ViewModel = FriendsViewModel()
 }
 
-class FriendsViewModel @Inject constructor(): BaseViewModel() {
+class FriendsViewModel @Inject constructor(): BaseViewModel<FrgFriendsBinding>() {
 
     fun handleTestError() {
         handleException(Exception("Some error"))

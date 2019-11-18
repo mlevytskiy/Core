@@ -2,6 +2,8 @@ package com.core.sample.viewmodel
 
 import androidx.lifecycle.ViewModel
 import com.core.sample.R
+import com.core.sample.databinding.FrgSample1Binding
+import com.core.sample.databinding.FrgSample2Binding
 import com.library.core.BaseViewModel
 import com.library.core.di.ViewModelKey
 import dagger.Module
@@ -19,7 +21,7 @@ class SampleModule2 {
     fun bindViewModelKey(): ViewModel = SampleViewModel2()
 }
 
-class SampleViewModel2 @Inject constructor(): BaseViewModel() {
+class SampleViewModel2 @Inject constructor(): BaseViewModel<FrgSample2Binding>() {
 
     val str = "fragment 2"
 
@@ -32,7 +34,7 @@ class SampleViewModel2 @Inject constructor(): BaseViewModel() {
     }
 
     fun prevScreen() {
-        popTo(R.id.sample2, false, this::class)
+        popTo(R.id.sample2, false)
     }
 
     override fun handleException(e: Exception) {
