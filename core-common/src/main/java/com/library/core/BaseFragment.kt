@@ -81,7 +81,7 @@ abstract class BaseFragment<B : ViewDataBinding, VM : BaseViewModel>: DaggerFrag
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel = ViewModelProviders.of(this, viewModelFactory)[getViewModelClass().java]
+        viewModel = ViewModelProviders.of(requireActivity(), viewModelFactory)[getViewModelClass().java]
     }
 
     protected abstract fun getLayoutRes(): Int
