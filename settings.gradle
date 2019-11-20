@@ -1,5 +1,5 @@
 include ':core-common-sample', ':core-common', ':core-memory-sample', ':core-adapters', ':app-appsview-sample', ':app-bottom-tabs',
-        ':app-get-all-apps', ':app-app-info-view', ':app-api', ':app-tagspannable'
+        ':app-get-all-apps', ':app-app-info-view', ':app-api', ':app-tagspannable', ':app-pick-country-dialog'
 
 //include ':core-common', ':core-adapters', ':app-bottom-tabs',
 //        ':app-get-all-apps', ':app-app-info-view'
