@@ -30,7 +30,7 @@ class SampleViewModel2 @Inject constructor(): BaseViewModel<FrgSample2Binding>()
     }
 
     fun nextScreen() {
-        //do nothing
+        //does nothing
     }
 
     fun prevScreen() {

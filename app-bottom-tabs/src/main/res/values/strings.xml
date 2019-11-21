@@ -15,7 +15,8 @@
     <string name="find_the_best_apps_in_the_world">Find the best apps\n</string>
     <string-array name="type_of_apps">
         <item>in the world</item>
-        <item>in country</item>
+        <item>in %s</item>
+        <item>in another country</item>
         <item>among friends</item>
     </string-array>
 

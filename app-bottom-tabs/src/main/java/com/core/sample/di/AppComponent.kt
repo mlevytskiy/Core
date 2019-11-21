@@ -14,6 +14,7 @@ import com.core.sample.MainActivity
 import com.core.sample.fragment.*
 import com.core.sample.util.ColorRes
 import com.core.sample.util.StringRes
+import com.core.sample.util.countriesdialog.CountriesHolder
 import com.core.sample.viewmodel.*
 import com.library.core.ViewModelFactory
 import dagger.BindsInstance
@@ -72,6 +73,10 @@ class AppModule {
 
     @Provides
     fun provideColorRes(context: Context) = ColorRes(context)
+
+    @Singleton
+    @Provides
+    fun provideCountriesHolder(context: Context) = CountriesHolder(context)
 
 }
 

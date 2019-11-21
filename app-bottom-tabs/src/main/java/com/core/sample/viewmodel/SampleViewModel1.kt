@@ -34,7 +34,7 @@ class SampleViewModel1 @Inject constructor(): BaseViewModel<FrgSample1Binding>()
     }
 
     fun prevScreen() {
-        //do nothing
+        //does nothing
     }
 
     override fun handleException(e: Exception) {

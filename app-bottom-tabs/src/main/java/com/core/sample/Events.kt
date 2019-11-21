@@ -8,4 +8,6 @@ class ShowPickOfAppsDialog(val type: HomeTitle.Type): BaseEvent()
 
 class ShowPickedApps(val appPackages: String): BaseEvent()
 
+class ShowCountriesDialog: BaseEvent()
+
 

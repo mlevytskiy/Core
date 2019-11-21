@@ -7,6 +7,8 @@ import com.core.sample.TagSpannableBuilder
 
 class HomeTitle(private val strRes: StringRes, colorRes: ColorRes): ObservableField<Spannable>() {
 
+    var countryName: String = "Ukraine"
+
     var type: Type = Type.IN_THE_WORLD
         set(value) {
             field = value
@@ -21,10 +23,14 @@ class HomeTitle(private val strRes: StringRes, colorRes: ColorRes): ObservableFi
         set(buildSpannable(strPrefix, getTagStr(strRes, type)))
     }
 
+    fun forciblyTextUpdate() {
+        set(buildSpannable(strPrefix, getTagStr(strRes, type)))
+    }
+
     private fun getTagStr(strRes: StringRes, type: Type) = when (type) {
         Type.IN_THE_WORLD -> strRes.getStrFromArray(R.array.type_of_apps, 0)
-        Type.IN_COUNTRY -> strRes.getStrFromArray(R.array.type_of_apps, 1)
-        Type.AMONG_FRIENDS -> strRes.getStrFromArray(R.array.type_of_apps, 2)
+        Type.IN_COUNTRY -> String.format(strRes.getStrFromArray(R.array.type_of_apps, 1), countryName)
+        Type.AMONG_FRIENDS -> strRes.getStrFromArray(R.array.type_of_apps, 3)
     }
 
     private fun buildSpannable(strPrefix: String, tag: String): Spannable {
