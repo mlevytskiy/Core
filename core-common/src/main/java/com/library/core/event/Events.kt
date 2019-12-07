@@ -9,3 +9,7 @@ class FragmentNavigationDirection(val nav: NavDirections) : BaseEvent()
 class PopBackTo(val id: Int, val inclusive: Boolean) : BaseEvent()
 
 class ShowToastEvent(val message: String) : BaseEvent()
+
+class ShowBottomNavEvent(val animate: Boolean = false) : BaseEvent()
+
+class HideBottomNavEvent(val animate: Boolean = false) : BaseEvent()

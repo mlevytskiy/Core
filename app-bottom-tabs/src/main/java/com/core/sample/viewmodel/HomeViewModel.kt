@@ -6,6 +6,7 @@ import com.core.sample.ShowCountriesDialog
 import com.core.sample.ShowPickOfAppsDialog
 import com.core.sample.ShowPickedApps
 import com.core.sample.databinding.FrgHomeBinding
+import com.core.sample.fragment.HomeFragmentDirections
 import com.core.sample.util.ColorRes
 import com.core.sample.util.HomeTitle
 import com.core.sample.util.StringRes
@@ -116,6 +117,10 @@ class HomeViewModel @Inject constructor(private val wumfApi : WumfApi,
         return country
     }
 
+    fun navigateToPeopleWhoLikes() {
+        navigate(HomeFragmentDirections.actionMoveToPeopleWhoLikes())
+    }
+
     fun getAllWorldApps() {
         startBgJob {
             callRetrofit(
@@ -149,7 +154,8 @@ class HomeViewModel @Inject constructor(private val wumfApi : WumfApi,
     private fun fillApps(response: GetNotMyAppsResponse?) {
         response?.let {
             val appsStr = prepareAppsForAdapter(it.apps)
-            postEvent(ShowPickedApps(appsStr))
+            val likes = prepareLikesForAdapter(it.apps)
+            postEvent(ShowPickedApps(appsStr, likes))
         } ?: kotlin.run {
             showToast("response is null")
         }
@@ -161,6 +167,14 @@ class HomeViewModel @Inject constructor(private val wumfApi : WumfApi,
         } else {
             return apps.map { it.packageName }.joinToString(",")
         }
+    }
+
+    private fun prepareLikesForAdapter(apps: List<App>): Map<String, Int> {
+        val likes = HashMap<String, Int>()
+        apps.forEach {
+            likes.put(it.packageName, it.whoLikes.size)
+        }
+        return likes
     }
 
     private fun <T> callRetrofit(call: Call<T>, result: (T?)->(String)) {

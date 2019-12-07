@@ -5,6 +5,7 @@ import android.util.AttributeSet
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.coroutines.*
+import wumf.com.appsprovider2.AppContainer
 import wumf.com.appsprovider2.AppProvider
 
 class AppsRecycleView(context: Context, attr: AttributeSet?) : RecyclerView(context, attr) {
@@ -12,12 +13,13 @@ class AppsRecycleView(context: Context, attr: AttributeSet?) : RecyclerView(cont
     private val supervisor = SupervisorJob()
     private var scope = CoroutineScope(Dispatchers.IO + supervisor)
     private var appProvider: AppProvider? = null
+    private var getAllAppsFromPhone = false
+    private var itemListener: ((AppContainer, Int)->Unit)? = null
 
     init {
         layoutManager = GridLayoutManager(getContext(), 3) as LayoutManager?
 
         var appsStr : String?
-        var getAllAppsFromPhone = false
 
         context.theme.obtainStyledAttributes(
             attr,
@@ -33,28 +35,40 @@ class AppsRecycleView(context: Context, attr: AttributeSet?) : RecyclerView(cont
         }
         appProvider = AppProvider(context)
         if (getAllAppsFromPhone) {
-            setPackages("")
+            setPackages("", HashMap())
         }
     }
 
-    fun setPackages(packagesStr: String?) {
+    fun setPackages(packagesStr: String?, likes: Map<String, Int>) {
         val packages = if (packagesStr?.isNotEmpty() ?: false) {
             packagesStr?.split(",") ?: emptyList()
         } else {
             emptyList()
+        }
+        if (!getAllAppsFromPhone && packages.isEmpty()) {
+            val adapter = getAdapter() as AppsAdapter?
+            adapter?.apps?.clear()
+            adapter?.notifyDataSetChanged()
+            return
         }
         startBgJob {
             var adapter: AppsAdapter? = null
             appProvider?.getNextApps(
                 updateBlock = { apps ->
                     adapter?.notifyDataSetChanged() ?: run {
-                        adapter = AppsAdapter(apps)
+                        adapter = AppsAdapter(apps, likes, itemListener)
                         setAdapter(adapter)
                     }
                 },
                 packages = packages
             )
         }
+    }
+
+    fun setItemClick(block: (AppContainer, Int)->Unit ) {
+        val adapter = getAdapter() as AppsAdapter?
+        itemListener = block
+        adapter?.setItemClick(block)
     }
 
     private fun startBgJob(block: suspend CoroutineScope.() -> Unit): Job {

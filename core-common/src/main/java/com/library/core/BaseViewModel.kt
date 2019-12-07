@@ -106,6 +106,17 @@ abstract class BaseViewModel<B : ViewDataBinding>: ViewModel(), Observable, Hold
         EventBus.getDefault().post(event)
     }
 
+    fun postStickyEvent(event: BaseEvent) {
+        EventBus.getDefault().postSticky(event)
+        startBgJob {
+            delay(100)
+            val catchedEvent = EventBus.getDefault().getStickyEvent(event.javaClass)
+            if (catchedEvent != null) {
+                EventBus.getDefault().removeStickyEvent(catchedEvent)
+            }
+        }
+    }
+
     enum class ErrorHandlerMode {
         HANDLE, IGNORE, THROW
     }

@@ -3,6 +3,7 @@ package com.app.api.viewmodel
 import androidx.databinding.ObservableField
 import androidx.lifecycle.ViewModel
 import com.app.api.api.*
+import com.app.api.databinding.FrgSample1Binding
 import com.library.core.BaseViewModel
 import com.library.core.di.ViewModelKey
 import dagger.Module
@@ -22,7 +23,7 @@ class SampleModule1 {
 }
 
 class SampleViewModel1 @Inject constructor(private val wumfApi : WumfApi,
-                                           private val headerInterceptor: HeaderInterceptor): BaseViewModel() {
+                                           private val headerInterceptor: HeaderInterceptor): BaseViewModel<FrgSample1Binding>() {
 
     val str = "fragment 1"
 
@@ -107,11 +108,33 @@ class SampleViewModel1 @Inject constructor(private val wumfApi : WumfApi,
         }
     }
 
+    fun getCountryApps() {
+        return getCountryApps("ru")
+    }
+
+    fun getCountryApps(country: String) {
+        startBgJob {
+            callRetrofit(
+                call = wumfApi.getNotMyApps(
+                    GetNotMyAppsRequest(
+                        inCountry = true,
+                        country = country,
+                        friends = emptyList()
+                    )
+                ),
+                result = { response ->
+                    //                fillApps(response)
+                    "appsIsNotEmpty=${response?.apps?.isNotEmpty()}"
+                }
+            )
+        }
+    }
+
     private fun <T> callRetrofit(call: Call<T>, result: (T?)->(String)) {
         val response = executeRetrofit(call=call,
-            generalError = { e -> showToast("error=" + e.message, SampleViewModel1::class) })
+            generalError = { e -> showToast("error=" + e.message) })
         response?.let{
-            showToast(result.invoke(it), SampleViewModel1::class)
+            showToast(result.invoke(it))
         }
     }
 

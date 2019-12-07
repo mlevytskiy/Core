@@ -1,6 +1,8 @@
 package com.library.core
 
+import android.app.Activity
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,13 +16,14 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.NavController
 import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.NavigationUI
+import com.library.core.event.HideBottomNavEvent
+import com.library.core.event.ShowBottomNavEvent
 import dagger.android.support.DaggerFragment
 import org.greenrobot.eventbus.EventBus
-import org.greenrobot.eventbus.EventBusException
 import javax.inject.Inject
 import kotlin.reflect.KClass
-
-
 
 abstract class BaseFragment<B : ViewDataBinding, VM : BaseViewModel<B>>: DaggerFragment() {
 
@@ -46,6 +49,11 @@ abstract class BaseFragment<B : ViewDataBinding, VM : BaseViewModel<B>>: DaggerF
     override fun onResume() {
         super.onResume()
         registerEventBus()
+        if (isShowBottomTabs()) {
+            viewModel?.postEvent(ShowBottomNavEvent(true))
+        } else {
+            viewModel?.postEvent(HideBottomNavEvent(true))
+        }
     }
 
     override fun onPause() {
@@ -53,11 +61,19 @@ abstract class BaseFragment<B : ViewDataBinding, VM : BaseViewModel<B>>: DaggerF
         super.onPause()
     }
 
+    protected open fun getToolbar(): Toolbar? {
+        return null
+    }
+
+    private fun isShowBottomTabs(): Boolean {
+        return getToolbar() == null
+    }
+
     private fun registerEventBus() {
         if (!EventBus.getDefault().isRegistered(this)) {
             try {
                 EventBus.getDefault().register(this)
-            } catch (exception : EventBusException) {
+            } catch (exception : Throwable) {
                 //ignore
             }
 //            log("event bus registered for: " + this::class.simpleName)
@@ -70,10 +86,6 @@ abstract class BaseFragment<B : ViewDataBinding, VM : BaseViewModel<B>>: DaggerF
     }
 
     abstract fun onInitVM()
-
-    protected open fun getToolbar(): Toolbar? {
-        return null
-    }
 
     protected abstract fun getViewModelClass(): KClass<VM>
 
@@ -104,8 +116,24 @@ abstract class BaseFragment<B : ViewDataBinding, VM : BaseViewModel<B>>: DaggerF
             (activity as AppCompatActivity).setSupportActionBar(it)
         }
         navController = findNavController()
+        getToolbar()?.let {
+            NavigationUI.setupActionBarWithNavController(
+                (activity as AppCompatActivity),
+                navController!!,
+                getAppBarConfiguration()
+            )
+                it.setNavigationOnClickListener { navController!!.popBackStack() }
+        }
         onInitVM()
+
+        val parent = binding?.root?.getParent()
+        if (parent != null) {
+            (parent as ViewGroup).removeView(binding?.root)
+        }
         return binding?.root
     }
 
+    open fun getAppBarConfiguration(): AppBarConfiguration {
+        return AppBarConfiguration(navController!!.graph)
+    }
 }

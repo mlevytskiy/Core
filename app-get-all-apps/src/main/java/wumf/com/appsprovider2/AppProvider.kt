@@ -19,7 +19,7 @@ class AppProvider(context: Context) {
 
     suspend fun getNextApps(
         packages: List<String> = emptyList(), queryType: QueryType = ANY_APP,
-        nextAppsAmount: Int = GET_APPS_AMOUNT, updateBlock: (List<AppContainer>) -> Unit
+        nextAppsAmount: Int = GET_APPS_AMOUNT, updateBlock: (MutableList<AppContainer>) -> Unit
     ) = withContext(Dispatchers.IO) {
         when(queryType) {
             INNER_APP-> {

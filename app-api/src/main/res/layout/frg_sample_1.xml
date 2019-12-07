@@ -80,6 +80,12 @@
                 android:onClick="@{() -> viewModel.getAllWorldApps()}"
                 android:text="Get all apps(for all users)" />
 
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="@{() -> viewModel.getCountryApps()}"
+                android:text="Get all apps(in country)" />
+
         </LinearLayout>
 
     </ScrollView>

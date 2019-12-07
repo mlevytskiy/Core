@@ -110,6 +110,9 @@ abstract class FragmentsModule {
     @ContributesAndroidInjector(modules = [MoreModule::class])
     abstract fun bindMore(): MoreFragment
 
+    @ContributesAndroidInjector(modules = [PeopleWhoLikesModule::class])
+    abstract fun bindPeopleWhoLikes(): PeopleWhoLikesFragment
+
 }
 
 private const val API_KEY_HEADER_KEY = "x-api-key"

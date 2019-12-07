@@ -33,7 +33,7 @@ class GooglePlayAppsProvider(context: Context) {
         return result
     }
 
-    fun wrapPackages(packages: List<String>): List<AppContainer> {
+    fun wrapPackages(packages: List<String>): MutableList<AppContainer> {
         val result = ArrayList<AppContainer>()
         packages.forEach {
             result.add(AppContainer(packageName = it, gpApp = GooglePlayApp(it)))
@@ -101,7 +101,7 @@ class GooglePlayAppsProvider(context: Context) {
                 kryo.writeObject(out, app, appSerializer)
                 out.close()
             } catch (e: Exception) {
-                //do nothing
+                //does nothing
             }
         }
 

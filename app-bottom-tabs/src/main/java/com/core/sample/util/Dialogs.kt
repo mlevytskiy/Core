@@ -8,10 +8,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ListView
-import android.widget.Toast
+import android.widget.TextView
+import com.appinfo.appmonsta.AppInfoView
 import com.core.sample.R
 import com.core.sample.util.countriesdialog.CountriesAdapter
 import com.core.sample.util.countriesdialog.Country
+import wumf.com.appsprovider2.AppContainer
 
 fun showCountriesDialog(context: Context, countries: ArrayList<Country>, checkedItem: Int, select: (Country)->Unit, cancel: (DialogInterface)->Unit): DialogInterface {
     return AlertDialog.Builder(context)
@@ -40,6 +42,35 @@ private fun createCountriesView(context: Context, countries: ArrayList<Country>,
 
 fun showLanguageDialog(context: Context, arrayId: Int) {
     //
+}
+
+fun showAppDialog(appContainer: AppContainer, context: Context, showInGPBlock: ()->Unit, showPeopleWhoLikesBlock: ()->Unit,
+                  peopleWhoLikes: Int): DialogInterface {
+    return AlertDialog.Builder(context)
+        .setTitle("")
+        .setView(createAppDialogView(appContainer, context, showInGPBlock, showPeopleWhoLikesBlock, peopleWhoLikes))
+        .setNegativeButton("Cancel", object : DialogInterface.OnClickListener {
+            override fun onClick(dialog: DialogInterface, which: Int) {
+                //?
+            }
+        }).show()
+}
+
+fun createAppDialogView(appContainer: AppContainer, context: Context,
+                        showInGPBlock: ()->Unit, showPeopleWhoLikesBlock: ()->Unit,
+                        peopleWhoLikes: Int): View {
+    //Todo: should be rewrite using databinding
+    val li = LayoutInflater.from(context)
+    val view = li.inflate(R.layout.dialog_app, null)
+    val appInfo = view.findViewById<AppInfoView>(R.id.app_info)
+    appInfo.setModel(appContainer)
+    val showInGP = view.findViewById<View>(R.id.show_in_google_play)
+    showInGP.setOnClickListener { showInGPBlock() }
+    val showPeopleWhoLike = view.findViewById<View>(R.id.show_people_who_likes)
+    showPeopleWhoLike.setOnClickListener { showPeopleWhoLikesBlock() }
+    val whoLikesTxt = view.findViewById<TextView>(R.id.who_likes_txt2)
+    whoLikesTxt.text = "$peopleWhoLikes"
+    return view
 }
 
 

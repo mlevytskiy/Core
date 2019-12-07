@@ -24,6 +24,10 @@ class AppInfoView(context: Context, attrs: AttributeSet) : LinearLayout(context,
 
     private val textView: TextView
     private val imageView: ImageView
+    private val whoLikesContainer: View
+    private val whoLikesTxt: TextView
+
+    private var packagesLikes: Map<String, Int>? = null
 
     init {
         orientation = VERTICAL
@@ -32,13 +36,8 @@ class AppInfoView(context: Context, attrs: AttributeSet) : LinearLayout(context,
         val view = View.inflate(getContext(), R.layout.view_app_info, this)
         textView = view.findViewById(R.id.text_view)
         imageView = view.findViewById(R.id.image_view)
-    }
-
-    fun setModel(model: AppInfoModelFromPhone) {
-        textView.setText(model.appName)
-        textView.setTextColor(Color.BLACK)
-        imageView.setImageURI(Uri.fromFile(File(model.pathToIconFile)))
-        imageView.setBackgroundColor(Color.TRANSPARENT)
+        whoLikesContainer = view.findViewById(R.id.who_likes_container)
+        whoLikesTxt = view.findViewById(R.id.who_likes_txt)
     }
 
     fun setModel(model: AppContainer) {
@@ -57,10 +56,16 @@ class AppInfoView(context: Context, attrs: AttributeSet) : LinearLayout(context,
         textView.setText("")
         imageView.setImageDrawable(null)
         imageView.setBackgroundColor(Color.LTGRAY)
+        whoLikesContainer.visibility = View.GONE
+    }
+
+    fun setLikesHashMap(value: Map<String, Int>) {
+        packagesLikes = value
     }
 
     fun setModel(model: App) {
         textView.setText(model.name)
+        setLikes(model.appPackage)
         textView.setTextColor(Color.BLACK)
         model.icon?.let {
             imageView.setImageDrawable(model.icon)
@@ -73,6 +78,7 @@ class AppInfoView(context: Context, attrs: AttributeSet) : LinearLayout(context,
 
     fun setModel(model: GooglePlayApp) {
         textView.setText(model.name)
+        setLikes(model.packageName)
         Glide.with(this).load(model.iconUrl)
             .listener(object : RequestListener<Drawable> {
                 override fun onLoadFailed(
@@ -97,5 +103,15 @@ class AppInfoView(context: Context, attrs: AttributeSet) : LinearLayout(context,
                 }
             })
             .into(imageView)
+    }
+
+    private fun setLikes(pkg: String) {
+        val likes = packagesLikes?.get(pkg)
+        likes?.let {
+            whoLikesContainer.visibility = View.VISIBLE
+            whoLikesTxt.text = "$likes"
+        } ?:run {
+            whoLikesContainer.visibility = View.GONE
+        }
     }
 }

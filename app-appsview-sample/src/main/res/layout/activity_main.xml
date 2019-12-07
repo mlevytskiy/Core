@@ -11,6 +11,11 @@
     android:layout_marginEnd="8dp"
     android:gravity="center" >
 
+    <com.appinfo.appmonsta.AppInfoView
+        android:id="@+id/app_info_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
     <EditText
         android:id="@+id/packages"
         android:layout_width="200dp"

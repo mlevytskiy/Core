@@ -78,7 +78,7 @@ public class SaveIconUtils {
                 try {
                     out.close();
                 } catch (IOException e) {
-                    //do nothing
+                    //does nothing
                 }
             }
         }
@@ -111,7 +111,7 @@ public class SaveIconUtils {
                         bitmapDrawable.getIntrinsicWidth() > iconHeight) {
                     bitmap = Bitmap.createScaledBitmap(bitmapDrawable.getBitmap(), iconHeight, iconHeight, false);
                 } else {
-                    //do nothing
+                    //does nothing
                 }
             }
         } else {
@@ -139,7 +139,7 @@ public class SaveIconUtils {
                         bitmapDrawable.getIntrinsicWidth() > iconHeight) {
                     bitmap = Bitmap.createScaledBitmap(bitmapDrawable.getBitmap(), iconHeight, iconHeight, false);
                 } else {
-                    //do nothing
+                    //does nothing
                 }
             }
         } else {

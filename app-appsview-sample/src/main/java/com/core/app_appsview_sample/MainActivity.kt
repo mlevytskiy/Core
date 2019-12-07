@@ -6,6 +6,7 @@ import android.view.View
 import android.view.View.*
 import android.widget.EditText
 import androidx.recyclerview.widget.RecyclerView
+import com.appinfo.appmonsta.AppInfoView
 import com.core.core_adapters.AppsRecycleView
 
 class MainActivity : Activity() {
@@ -13,6 +14,10 @@ class MainActivity : Activity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        val appInfoView = findViewById<AppInfoView>(R.id.app_info_view)
+//        appInfoView.setModel()
+
     }
 
     fun onClickSend(view: View) {
@@ -21,7 +26,7 @@ class MainActivity : Activity() {
         val sendButton = view
 
         val packages = packagesView.text.toString()
-        appsView.setPackages(packages)
+        appsView.setPackages(packages, HashMap())
         appsView.visibility= RecyclerView.VISIBLE
 
         sendButton.visibility = GONE

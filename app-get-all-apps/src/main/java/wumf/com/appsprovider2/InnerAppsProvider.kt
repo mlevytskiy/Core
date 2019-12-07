@@ -76,7 +76,7 @@ class InnerAppsProvider(context: Context) {
 
     fun getNextApps(amount: Int = 6, allApps: List<AppContainer>, currentIndex: Int): Int {
 
-        val nextIndex = Math.min(allApps.size-1, currentIndex + amount)
+        val nextIndex = Math.min(allApps.size, currentIndex + amount)
         if (nextIndex == currentIndex) {
             return allApps.size //end
         }
