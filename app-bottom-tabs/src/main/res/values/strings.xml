@@ -6,6 +6,7 @@
     <string name="profile">Profile</string>
     <string name="more">more</string>
     <string name="cancel">cancel</string>
+    <string name="close">close</string>
 
     <string-array name="languages">
         <item>english</item>

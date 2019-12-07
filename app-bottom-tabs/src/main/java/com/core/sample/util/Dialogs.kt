@@ -9,6 +9,7 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.ListView
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import com.appinfo.appmonsta.AppInfoView
 import com.core.sample.R
 import com.core.sample.util.countriesdialog.CountriesAdapter
@@ -16,14 +17,18 @@ import com.core.sample.util.countriesdialog.Country
 import wumf.com.appsprovider2.AppContainer
 
 fun showCountriesDialog(context: Context, countries: ArrayList<Country>, checkedItem: Int, select: (Country)->Unit, cancel: (DialogInterface)->Unit): DialogInterface {
-    return AlertDialog.Builder(context)
+    val dialog = AlertDialog.Builder(context)
         .setTitle("")
         .setView(createCountriesView(context, countries, select))
-        .setNegativeButton("Cancel", object : DialogInterface.OnClickListener {
+        .setNegativeButton(R.string.close, object : DialogInterface.OnClickListener {
             override fun onClick(dialog: DialogInterface, which: Int) {
                 cancel(dialog)
             }
         }).show()
+
+    dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(ContextCompat.getColor(context, R.color.blue))
+
+    return dialog
 }
 private fun createCountriesView(context: Context, countries: ArrayList<Country>, select: (Country)->Unit): View {
     val li = LayoutInflater.from(context)
@@ -46,14 +51,18 @@ fun showLanguageDialog(context: Context, arrayId: Int) {
 
 fun showAppDialog(appContainer: AppContainer, context: Context, showInGPBlock: ()->Unit, showPeopleWhoLikesBlock: ()->Unit,
                   peopleWhoLikes: Int): DialogInterface {
-    return AlertDialog.Builder(context)
+    val dialog = AlertDialog.Builder(context)
         .setTitle("")
         .setView(createAppDialogView(appContainer, context, showInGPBlock, showPeopleWhoLikesBlock, peopleWhoLikes))
-        .setNegativeButton("Cancel", object : DialogInterface.OnClickListener {
+        .setNegativeButton(R.string.close, object : DialogInterface.OnClickListener {
             override fun onClick(dialog: DialogInterface, which: Int) {
                 //?
             }
         }).show()
+
+    dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(ContextCompat.getColor(context, R.color.blue))
+
+    return dialog
 }
 
 fun createAppDialogView(appContainer: AppContainer, context: Context,
@@ -86,7 +95,7 @@ fun showSimpleDialog(context: Context, arrayId: Int, checkedItem: Int, select: (
                 select(array, position)
             }
         })
-        .setNegativeButton(R.string.cancel, object : DialogInterface.OnClickListener {
+        .setNegativeButton(R.string.close, object : DialogInterface.OnClickListener {
             override fun onClick(dialog: DialogInterface, which: Int) {
                 cancel(dialog)
             }
