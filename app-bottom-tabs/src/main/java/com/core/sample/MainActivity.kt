@@ -12,6 +12,8 @@ import com.library.core.event.ShowBottomNavEvent
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
 
+private const val BOTTOM_NAV_HIDE_SHOW_ANIMATION_DURATION = 150L
+
 class MainActivity : BaseActivity(R.layout.activity_main) {
 
     private var bottomNavigationView : BottomNavigationView? = null
@@ -24,11 +26,6 @@ class MainActivity : BaseActivity(R.layout.activity_main) {
         super.onCreate(savedInstanceState)
         bottomNavigationView = findViewById<BottomNavigationView>(R.id.home_bottom_nav)
         bottomNavigationView?.setupWithNavController(navController)
-//        bottomNavigationView.setOnNavigationItemSelectedListener {item ->
-//            Toast.makeText(this, "click", Toast.LENGTH_LONG).show()
-//            return@setOnNavigationItemSelectedListener true
-//        }
-
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
@@ -41,7 +38,7 @@ class MainActivity : BaseActivity(R.layout.activity_main) {
                     .setListener(null)
                     .alpha(1f)
                     .translationY(0f)
-                    .duration = 200
+                    .duration = BOTTOM_NAV_HIDE_SHOW_ANIMATION_DURATION
             } else {
                 bottomNavigationView!!.translationY = 0f
             }
@@ -65,7 +62,7 @@ class MainActivity : BaseActivity(R.layout.activity_main) {
                     })
                     .alpha(0f)
                     .translationY(bottomNavigationView!!.height.toFloat())
-                    .duration = 200
+                    .duration = BOTTOM_NAV_HIDE_SHOW_ANIMATION_DURATION
             } else {
                 bottomNavigationView!!.translationY = bottomNavigationView!!.height.toFloat()
                 bottomNavigationView!!.visibility = View.GONE
