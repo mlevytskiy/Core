@@ -50,7 +50,7 @@ fun showLanguageDialog(context: Context, arrayId: Int) {
 }
 
 fun showAppDialog(appContainer: AppContainer, context: Context, showInGPBlock: ()->Unit, showPeopleWhoLikesBlock: ()->Unit,
-                  peopleWhoLikes: Int): DialogInterface {
+                  peopleWhoLikes: List<Int>): DialogInterface {
     val dialog = AlertDialog.Builder(context)
         .setTitle("")
         .setView(createAppDialogView(appContainer, context, showInGPBlock, showPeopleWhoLikesBlock, peopleWhoLikes))
@@ -67,7 +67,7 @@ fun showAppDialog(appContainer: AppContainer, context: Context, showInGPBlock: (
 
 fun createAppDialogView(appContainer: AppContainer, context: Context,
                         showInGPBlock: ()->Unit, showPeopleWhoLikesBlock: ()->Unit,
-                        peopleWhoLikes: Int): View {
+                        peopleWhoLikes: List<Int>): View {
     //Todo: should be rewrite using databinding
     val li = LayoutInflater.from(context)
     val view = li.inflate(R.layout.dialog_app, null)
@@ -78,7 +78,7 @@ fun createAppDialogView(appContainer: AppContainer, context: Context,
     val showPeopleWhoLike = view.findViewById<View>(R.id.show_people_who_likes)
     showPeopleWhoLike.setOnClickListener { showPeopleWhoLikesBlock() }
     val whoLikesTxt = view.findViewById<TextView>(R.id.who_likes_txt2)
-    whoLikesTxt.text = "$peopleWhoLikes"
+    whoLikesTxt.text = "${peopleWhoLikes.size}"
     return view
 }
 

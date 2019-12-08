@@ -27,7 +27,7 @@ class AppInfoView(context: Context, attrs: AttributeSet) : LinearLayout(context,
     private val whoLikesContainer: View
     private val whoLikesTxt: TextView
 
-    private var packagesLikes: Map<String, Int>? = null
+    private var packagesLikes: Map<String, List<Int>>? = null
 
     init {
         orientation = VERTICAL
@@ -59,7 +59,7 @@ class AppInfoView(context: Context, attrs: AttributeSet) : LinearLayout(context,
         whoLikesContainer.visibility = View.GONE
     }
 
-    fun setLikesHashMap(value: Map<String, Int>) {
+    fun setLikesHashMap(value: Map<String, List<Int>>) {
         packagesLikes = value
     }
 
@@ -109,7 +109,7 @@ class AppInfoView(context: Context, attrs: AttributeSet) : LinearLayout(context,
         val likes = packagesLikes?.get(pkg)
         likes?.let {
             whoLikesContainer.visibility = View.VISIBLE
-            whoLikesTxt.text = "$likes"
+            whoLikesTxt.text = "${likes.size}"
         } ?:run {
             whoLikesContainer.visibility = View.GONE
         }

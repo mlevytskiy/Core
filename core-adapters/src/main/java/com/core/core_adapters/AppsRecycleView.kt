@@ -14,7 +14,7 @@ class AppsRecycleView(context: Context, attr: AttributeSet?) : RecyclerView(cont
     private var scope = CoroutineScope(Dispatchers.IO + supervisor)
     private var appProvider: AppProvider? = null
     private var getAllAppsFromPhone = false
-    private var itemListener: ((AppContainer, Int)->Unit)? = null
+    private var itemListener: ((AppContainer, List<Int>)->Unit)? = null
 
     init {
         layoutManager = GridLayoutManager(getContext(), 3) as LayoutManager?
@@ -39,7 +39,7 @@ class AppsRecycleView(context: Context, attr: AttributeSet?) : RecyclerView(cont
         }
     }
 
-    fun setPackages(packagesStr: String?, likes: Map<String, Int>) {
+    fun setPackages(packagesStr: String?, likes: Map<String, List<Int>>) {
         val packages = if (packagesStr?.isNotEmpty() ?: false) {
             packagesStr?.split(",") ?: emptyList()
         } else {
@@ -65,7 +65,7 @@ class AppsRecycleView(context: Context, attr: AttributeSet?) : RecyclerView(cont
         }
     }
 
-    fun setItemClick(block: (AppContainer, Int)->Unit ) {
+    fun setItemClick(block: (AppContainer, List<Int>)->Unit ) {
         val adapter = getAdapter() as AppsAdapter?
         itemListener = block
         adapter?.setItemClick(block)

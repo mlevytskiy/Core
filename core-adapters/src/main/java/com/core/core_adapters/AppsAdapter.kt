@@ -5,8 +5,8 @@ import androidx.recyclerview.widget.RecyclerView
 import wumf.com.appsprovider2.AppContainer
 
 class AppsAdapter(val apps: MutableList<AppContainer> = ArrayList(),
-                  private val likes: Map<String, Int>,
-                  private var listenerBlock: ((AppContainer, Int)->Unit)? ) : RecyclerView.Adapter<AppViewHolder>() {
+                  private val likes: Map<String, List<Int>>,
+                  private var listenerBlock: ((AppContainer, List<Int>)->Unit)? ) : RecyclerView.Adapter<AppViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AppViewHolder {
         return AppViewHolder(parent, likes)
@@ -20,7 +20,7 @@ class AppsAdapter(val apps: MutableList<AppContainer> = ArrayList(),
         holder.bind(apps[position], listenerBlock)
     }
 
-    fun setItemClick(block: (AppContainer, Int)->Unit ) {
+    fun setItemClick(block: (AppContainer, List<Int>)->Unit ) {
         listenerBlock = block
     }
 

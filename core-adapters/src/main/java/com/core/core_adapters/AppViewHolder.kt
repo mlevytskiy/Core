@@ -7,17 +7,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.appinfo.appmonsta.AppInfoView
 import wumf.com.appsprovider2.AppContainer
 
-class AppViewHolder(parent: ViewGroup, private val likes: Map<String, Int>):
+class AppViewHolder(parent: ViewGroup, private val likes: Map<String, List<Int>>):
     RecyclerView.ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_app, parent, false)) {
 
-    fun bind(app: AppContainer, clickBlock: ((AppContainer, Int)->Unit)?) {
+    fun bind(app: AppContainer, clickBlock: ((AppContainer, List<Int>)->Unit)?) {
         (itemView as AppInfoView).setLikesHashMap(likes)
         itemView.setModel(app)
-        itemView.setOnClickListener(object : View.OnClickListener {
-            override fun onClick(v: View?) {
-                clickBlock?.invoke(app, likes.get(app.packageName)?:0)
-            }
-        })
+        itemView.setOnClickListener { clickBlock?.invoke(app, likes.get(app.packageName)?: emptyList()) }
     }
 
 }

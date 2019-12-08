@@ -6,7 +6,7 @@ import com.library.core.event.BaseEvent
 
 class ShowPickOfAppsDialog(val type: HomeTitle.Type): BaseEvent()
 
-class ShowPickedApps(val appPackages: String, val likes: Map<String, Int>): BaseEvent()
+class ShowPickedApps(val appPackages: String, val likes: Map<String, List<Int>>): BaseEvent()
 
 class ShowCountriesDialog: BaseEvent()
 

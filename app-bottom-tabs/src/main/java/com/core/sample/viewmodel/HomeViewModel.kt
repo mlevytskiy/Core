@@ -169,10 +169,10 @@ class HomeViewModel @Inject constructor(private val wumfApi : WumfApi,
         }
     }
 
-    private fun prepareLikesForAdapter(apps: List<App>): Map<String, Int> {
-        val likes = HashMap<String, Int>()
+    private fun prepareLikesForAdapter(apps: List<App>): Map<String, List<Int>> {
+        val likes = HashMap<String, List<Int>>()
         apps.forEach {
-            likes.put(it.packageName, it.whoLikes.size)
+            likes.put(it.packageName, it.whoLikes)
         }
         return likes
     }
