@@ -2,6 +2,6 @@
 //        ':app-get-all-apps', ':app-app-info-view', ':app-api', ':app-tagspannable', ':app-pick-country-dialog'
 
 include ':core-common', ':core-adapters', ':app-bottom-tabs',
-        ':app-get-all-apps', ':app-app-info-view'
+        ':app-get-all-apps', ':app-app-info-view', ':app-libtd', ':app-circular-button'
 
 rootProject.name='Core'
