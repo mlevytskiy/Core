@@ -10,4 +10,16 @@ class ShowPickedApps(val appPackages: String, val likes: Map<String, List<Int>>)
 
 class ShowCountriesDialog: BaseEvent()
 
+class ShowDetectedPhoneNumberEvent : BaseEvent()
+
+class ShowNextButtonInProgressState: BaseEvent()
+
+class ShowEnterCodeState: BaseEvent()
+
+class ShowSuccess: BaseEvent()
+
+class MoveToHomeScreen : BaseEvent()
+
+
+
 

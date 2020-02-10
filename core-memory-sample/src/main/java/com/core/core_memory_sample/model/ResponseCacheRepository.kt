@@ -4,8 +4,10 @@ import java.util.*
 
 interface ResponseCacheRepository {
 
-    fun set(id:Long, date: Date?)
-    fun get(id: Long): Date?
+    fun set(date: Date?)
+    fun get(): Date?
     fun isEmpty(): Boolean
 
+    fun getObj(): SomeObj?
+    fun setObj(someObj: SomeObj?)
 }

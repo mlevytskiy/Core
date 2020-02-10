@@ -2,6 +2,7 @@ package com.core.core_memory_sample
 
 import android.app.Activity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import com.core.core_memory_sample.model.*
@@ -33,13 +34,15 @@ class MainActivity: Activity() {
 //            Toast.makeText(this, "value $randomV saved; time: $diff", Toast.LENGTH_LONG).show()
 //        }
         responseCacheRepository?.let {
-            it.set(12, Date())
+            Log.i("testr","it.setObj(SomeObj())")
+            it.setObj(SomeObj())
         }
+        Log.i("testr","responseCacheRepository")
     }
 
     fun onClickLoad(view: View) {
         responseCacheRepository?.let {
-            val isEmpty = it.get(12) == null
+            val isEmpty = it.getObj() == null
             Toast.makeText(this, "isEmpty=$isEmpty", Toast.LENGTH_LONG).show()
         }
 //        systemInfoRepository?.let {

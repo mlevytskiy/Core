@@ -1,21 +1,26 @@
 package com.library.core
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.library.core.event.FragmentNavigationDirection
+import com.library.core.event.HandleOnActivityResult
 import com.library.core.event.ShowToastEvent
 import dagger.android.support.DaggerAppCompatActivity
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
+import java.lang.ref.WeakReference
 
 abstract class BaseActivity(val layoutRes: Int) : DaggerAppCompatActivity() {
 
     protected lateinit var navController: NavController
 
     protected abstract fun getNavRes(): Int
+
+    private var onActivityResultHandler: WeakReference<OnActivityResultHandler>? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,6 +37,11 @@ abstract class BaseActivity(val layoutRes: Int) : DaggerAppCompatActivity() {
     @Subscribe(threadMode = ThreadMode.POSTING)
     fun navigate(event: FragmentNavigationDirection) {
         navController.navigate(event.nav)
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    fun onEvent(event: HandleOnActivityResult) {
+        onActivityResultHandler = WeakReference(event.handler)
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
@@ -54,6 +64,19 @@ abstract class BaseActivity(val layoutRes: Int) : DaggerAppCompatActivity() {
         if (!EventBus.getDefault().isRegistered(this)) {
             EventBus.getDefault().register(this)
 //            log("event bus registered for: " + this::class.simpleName)
+        }
+    }
+
+    override fun onActivityResult(
+        requestCode: Int,
+        resultCode: Int,
+        data: Intent?
+    ) {
+        onActivityResultHandler?.let {
+            onActivityResultHandler?.get()?.onActivityResult(requestCode, resultCode, data)
+            onActivityResultHandler = null
+        } ?: run {
+            super.onActivityResult(requestCode, resultCode, data)
         }
     }
 

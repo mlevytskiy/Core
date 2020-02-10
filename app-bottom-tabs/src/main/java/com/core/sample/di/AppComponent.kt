@@ -12,11 +12,13 @@ import com.core.sample.App
 import com.core.sample.BuildConfig
 import com.core.sample.MainActivity
 import com.core.sample.fragment.*
+import com.core.sample.memory.UserInfoRepository
 import com.core.sample.util.ColorRes
 import com.core.sample.util.StringRes
 import com.core.sample.util.countriesdialog.CountriesHolder
 import com.core.sample.viewmodel.*
 import com.library.core.ViewModelFactory
+import com.library.telegramkotlinapi.handler.CommonHandler
 import dagger.BindsInstance
 import dagger.Component
 import dagger.Module
@@ -28,6 +30,7 @@ import javax.inject.Singleton
 import dagger.android.ContributesAndroidInjector
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import org.drinkless.td.libcore.telegram.Client
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -78,6 +81,14 @@ class AppModule {
     @Provides
     fun provideCountriesHolder(context: Context) = CountriesHolder(context)
 
+    @Singleton
+    @Provides
+    fun provideUserInfoRepository(context: Context): UserInfoRepository {
+        val repository = UserInfoRepository(context)
+        repository.initCache()
+        return repository
+    }
+
 }
 
 @Module
@@ -112,6 +123,14 @@ abstract class FragmentsModule {
 
     @ContributesAndroidInjector(modules = [PeopleWhoLikesModule::class])
     abstract fun bindPeopleWhoLikes(): PeopleWhoLikesFragment
+
+    @ContributesAndroidInjector(modules = [EnterPhoneNumberModule::class])
+    abstract fun bindEnterPhoneNumberFragment(): EnterPhoneNumberFragment
+
+    @ContributesAndroidInjector(modules = [WaitYourPhoneNumberDetectingModule::class])
+    abstract fun bindWaitYourPhoneNumberDetectingFragment(): WaitYourPhoneNumberDetectingFragment
+
+
 
 }
 
@@ -162,6 +181,17 @@ class RetrofitModule {
     @Provides
     fun getWumfApi(retrofit: Retrofit): WumfApi {
         return retrofit.create(WumfApi::class.java)
+    }
+
+    @Singleton
+    @Provides
+    fun getTelegramClient(context: Context): Client {
+        val handler = CommonHandler(context)
+        val client = Client.create(handler,
+            Client.ExceptionHandler { e -> Log.i("testr", "onException " + e) },
+            Client.ExceptionHandler { e -> Log.i("testr", "onException " + e) })
+        handler.client = client
+        return client
     }
 
 }

@@ -23,8 +23,9 @@ class FastActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         val intent = Intent(this, MainActivity::class.java)
-        startActivity(intent)
         finish()
+        startActivity(intent)
+
 
 //        setContentView(R.layout.activity_main)
 //

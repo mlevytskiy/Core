@@ -18,6 +18,7 @@ import android.widget.ScrollView
 import android.widget.TextView
 import androidx.annotation.StringRes
 import androidx.core.content.ContextCompat
+import androidx.core.view.marginTop
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
@@ -272,6 +273,17 @@ object DataBindingAdapters {
             }
         }
     }
+
+    @JvmStatic
+    @BindingAdapter("android:layout_marginTop")
+    fun setStatusBarHeight(view: androidx.appcompat.widget.Toolbar, marginTop: Int) {
+        val params = view.layoutParams
+        if (params is ViewGroup.MarginLayoutParams) {
+            params.topMargin = marginTop
+            view.layoutParams = params
+        }
+    }
+
 
     @JvmStatic
     @BindingAdapter("setStatusBarMarginTop")

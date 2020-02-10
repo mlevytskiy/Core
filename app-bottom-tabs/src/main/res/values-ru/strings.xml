@@ -1,0 +1,11 @@
+<resources>
+
+    <string name="hello_words">Привет!\nДелись своими приложениями с друзьями!</string>
+    <string name="go">Открить!</string>
+    <string name="wait_your_phone_number_detecting">Подождите\nВаш номер\nопределяеться...\n(+XXX)????6??8??</string>
+
+    <string name="enter_your_phone_number_to_get_started">Введите Ваш номер телефона</string>
+    <string name="you_will_receive_a_verification_code">Вы получите уведомеление с кодом из \nтелеграма(Telegram app)</string>
+    <string name="next">Далее</string>
+
+</resources>

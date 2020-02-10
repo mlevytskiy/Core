@@ -19,10 +19,10 @@
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/db_toolbar"
-            style="@style/DBToolbar"
+            style="@style/Toolbar"
             android:layout_height="50dp"
             android:background="@android:color/holo_purple"
-            android:layout_marginTop="35dp" />
+            android:layout_marginTop="@{viewModel.getStatusBarHeight()}" />
 
         <View
             android:layout_width="match_parent"

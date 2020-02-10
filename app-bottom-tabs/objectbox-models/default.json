@@ -1,0 +1,72 @@
+{
+  "_note1": "KEEP THIS FILE! Check it into a version control system (VCS) like git.",
+  "_note2": "ObjectBox manages crucial IDs for your object model. See docs for details.",
+  "_note3": "If you have VCS merge conflicts, you must resolve them according to ObjectBox docs.",
+  "entities": [
+    {
+      "id": "1:4982068173754680557",
+      "lastPropertyId": "8:5226186048173303849",
+      "name": "UserInfo",
+      "properties": [
+        {
+          "id": "1:6487971075961106122",
+          "name": "id",
+          "type": 6,
+          "flags": 129
+        },
+        {
+          "id": "2:1052892224202408278",
+          "name": "statusBarHeight",
+          "type": 5,
+          "flags": 4
+        },
+        {
+          "id": "3:6687390732542033350",
+          "name": "language",
+          "type": 2,
+          "flags": 4
+        },
+        {
+          "id": "5:6104950118329389672",
+          "name": "phoneNumberFromSystem",
+          "type": 9
+        },
+        {
+          "id": "7:676417802824043354",
+          "name": "telegramUser",
+          "type": 9
+        },
+        {
+          "id": "8:5226186048173303849",
+          "name": "registrationToken",
+          "type": 9
+        }
+      ],
+      "relations": []
+    }
+  ],
+  "lastEntityId": "2:578841254329874128",
+  "lastIndexId": "1:1987005983791605309",
+  "lastRelationId": "0:0",
+  "lastSequenceId": "0:0",
+  "modelVersion": 5,
+  "modelVersionParserMinimum": 5,
+  "retiredEntityUids": [
+    578841254329874128
+  ],
+  "retiredIndexUids": [
+    1987005983791605309
+  ],
+  "retiredPropertyUids": [
+    5382862387928481085,
+    2890379800603101818,
+    1954628808900555934,
+    353204091785214066,
+    3677357072522921946,
+    7550701491862591496,
+    6180008963986465174,
+    9037502938683668108
+  ],
+  "retiredRelationUids": [],
+  "version": 1
+}

@@ -1,8 +1,7 @@
 package com.library.core
 
-import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -25,7 +24,8 @@ import org.greenrobot.eventbus.EventBus
 import javax.inject.Inject
 import kotlin.reflect.KClass
 
-abstract class BaseFragment<B : ViewDataBinding, VM : BaseViewModel<B>>: DaggerFragment() {
+abstract class BaseFragment<B : ViewDataBinding, VM : BaseViewModel<B>>: DaggerFragment(),
+    OnActivityResultHandler {
 
     @JvmField @Inject
     var viewModelFactory: ViewModelProvider.Factory? = null
@@ -34,9 +34,10 @@ abstract class BaseFragment<B : ViewDataBinding, VM : BaseViewModel<B>>: DaggerF
 
     var binding: B? = null
 
-    private var navController: NavController? = null
+    protected var navController: NavController? = null
 
     fun navigate(nav: NavDirections) {
+        navController?.navigate(nav)
 //        log("nav to: $nav")
 //        postEvent(FragmentNavigationDirection(nav, this::class))
     }
@@ -131,6 +132,13 @@ abstract class BaseFragment<B : ViewDataBinding, VM : BaseViewModel<B>>: DaggerF
             (parent as ViewGroup).removeView(binding?.root)
         }
         return binding?.root
+    }
+
+    override fun onActivityResult(
+        requestCode: Int,
+        resultCode: Int,
+        data: Intent?
+    ) {
     }
 
     open fun getAppBarConfiguration(): AppBarConfiguration {

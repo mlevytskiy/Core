@@ -6,6 +6,10 @@
 
     <color name="gray0">#3f54B6CB</color>
 
+    <color name="green">#28BB35</color>
+
+    <color name="spring_green">#2AF89C</color>
+
     <color name="gray1">#7f54B6CB</color>
     <color name="gray2">#ffffffff</color>
     <color name="black_alpha_50">#7F000000</color>
@@ -13,4 +17,20 @@
     <color name="endeavour_alpha_50">#7F003770</color>
     <color name="finn_alpha_69">#AF6B255E</color>
     <color name="observatory_alpha_6">#10008577</color>
+    <color name="yellow">#FECD50</color>
+    <color name="white">@android:color/white</color>
+
+    <color name="signal_primary">#ff2090ea</color>
+    <color name="signal_primary_dark">#ff1c7ac5</color>
+    <color name="signal_primary_alpha33">#552090ea</color>
+    <color name="signal_primary_alpha_focus">#882090ea</color>
+
+    <color name="textsecure_primary">#ff2090ea</color>
+    <color name="textsecure_primary_dark">@color/signal_primary_dark</color>
+    <color name="textsecure_primary_alpha33">@color/signal_primary_alpha33</color>
+
+    <color name="silver_chalice_alpha_100">#FFAAAAAA</color>
+
+    <color name="silver_sand">#BBBDBE</color>
+
 </resources>

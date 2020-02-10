@@ -25,7 +25,7 @@
     },
     {
       "id": "3:6307433440911717266",
-      "lastPropertyId": "3:198886892244539907",
+      "lastPropertyId": "4:3412271987049852431",
       "name": "ResponseCache",
       "properties": [
         {
@@ -43,13 +43,35 @@
           "id": "3:198886892244539907",
           "name": "additionalData",
           "type": 9
+        },
+        {
+          "id": "4:3412271987049852431",
+          "name": "someObjId",
+          "indexId": "1:3733186953980215776",
+          "type": 11,
+          "flags": 1548,
+          "relationTarget": "SomeObj"
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "4:820166003137463569",
+      "lastPropertyId": "1:7525938550562582921",
+      "name": "SomeObj",
+      "properties": [
+        {
+          "id": "1:7525938550562582921",
+          "name": "id",
+          "type": 6,
+          "flags": 129
         }
       ],
       "relations": []
     }
   ],
-  "lastEntityId": "3:6307433440911717266",
-  "lastIndexId": "0:0",
+  "lastEntityId": "4:820166003137463569",
+  "lastIndexId": "1:3733186953980215776",
   "lastRelationId": "0:0",
   "lastSequenceId": "0:0",
   "modelVersion": 5,

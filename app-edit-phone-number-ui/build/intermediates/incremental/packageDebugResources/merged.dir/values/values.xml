@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:ns1="http://schemas.android.com/tools">
+    <color name="black2">#FF202020</color>
+    <color name="dodger_blue_alpha_100">#FF2090EA</color>
+    <color name="dodger_blue_alpha_50">#7F2090EA</color>
+    <color name="gray">#ff888888</color>
+    <color name="japanese_maple">#BD0711</color>
+    <color name="lite_gray">#fff8f8f8</color>
+    <color name="silver_sand">#BBBDBE</color>
+    <string name="country">Ukraine</string>
+    <string name="phone_number">Phone Number</string>
+    <style name="Delete.KeyboardButtonTheme" parent="KeyboardButtonTheme">
+        <item name="android:background">@drawable/red_circle_selector</item>
+        <item name="android:textColor">@color/japanese_maple</item>
+    </style>
+    <style name="KeyboardButtonTheme" parent="Widget.AppCompat.Button.Borderless">
+        <item name="android:background">@drawable/circle_selector</item>
+        <item name="android:layout_width">60dp</item>
+        <item name="android:layout_height">60dp</item>
+        <item name="android:layout_margin">8dp</item>
+        <item name="android:textSize">16dp</item>
+        <item name="android:fontFamily">italic</item>
+    </style>
+    <style name="PhoneNumberEditTextLabelTheme">
+        <item name="android:textColor">?android:textColorSecondary</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:lineSpacingExtra">2sp</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:letterSpacing" ns1:ignore="NewApi">0.03</item>
+    </style>
+    <declare-styleable name="LabeledEditText">
+
+        <attr format="integer" name="bindCustomKeyboard"/>
+        <attr format="string" localization="suggested" name="hintText"/>
+        <attr format="string" name="text"/>
+        <attr format="color" name="lBackground"/>
+        <attr format="color" name="borderColor"/>
+        <attr format="enum" name="mode">
+            <enum name="SIMPLE_LABEL" value="0"/>
+            <enum name="PHONE_NUMBER" value="1"/>
+        </attr>
+
+    </declare-styleable>
+    <declare-styleable name="PhoneNumberFlipWrapper">
+
+        <attr format="integer" name="customKeyboard"/>
+
+    </declare-styleable>
+</resources>

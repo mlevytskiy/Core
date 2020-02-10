@@ -3,10 +3,8 @@ package com.core.sample
 import android.animation.Animator
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.library.core.BaseActivity
 import com.library.core.event.HideBottomNavEvent
 import com.library.core.event.ShowBottomNavEvent
 import org.greenrobot.eventbus.Subscribe
@@ -14,7 +12,7 @@ import org.greenrobot.eventbus.ThreadMode
 
 private const val BOTTOM_NAV_HIDE_SHOW_ANIMATION_DURATION = 150L
 
-class MainActivity : BaseActivity(R.layout.activity_main) {
+class MainActivity : WumfBaseActivity(R.layout.activity_main) {
 
     private var bottomNavigationView : BottomNavigationView? = null
 
@@ -69,4 +67,5 @@ class MainActivity : BaseActivity(R.layout.activity_main) {
             }
         }
     }
+
 }

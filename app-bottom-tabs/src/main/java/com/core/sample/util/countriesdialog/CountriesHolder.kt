@@ -76,7 +76,7 @@ class CountriesHolder(private val context: Context) {
         try {
 
             val systemProperties = Class.forName("android.os.SystemProperties")
-            val get = systemProperties.getMethod("get", String::class.java)
+            val get = systemProperties.getMethod("getStatusBarHeight", String::class.java)
 
             val homeOperator = get.invoke(
                 systemProperties,

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="com.core.sample.viewmodel.WaitYourPhoneNumberDetectingViewModel" />
+    </data>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:background="#ECECEC"
+            android:gravity="center">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                style="@style/Toolbar.Empty" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_wait"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/black"
+                android:text="@string/wait_your_phone_number_detecting"
+                android:gravity="center"
+                android:lineSpacingMultiplier="1.3"
+                android:textSize="@dimen/text_size_24" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{String.valueOf(viewModel.phoneNumberDetectingSeconds)}"
+                android:gravity="center"
+                android:textColor="@color/yellow"
+                android:textStyle="bold"
+                android:includeFontPadding="false"
+                android:textSize="@dimen/pump_number_text_size"
+                tools:text="3" />
+
+        </LinearLayout>
+
+</layout>

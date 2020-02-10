@@ -7,13 +7,20 @@
     <string name="more">more</string>
     <string name="cancel">cancel</string>
     <string name="close">close</string>
+    <string name="wait_your_phone_number_detecting">Wait\nYour phone number\ndetecting...\n(+XXX)????6??8??</string>
+    <string name="enter_your_phone_number_to_get_started">Enter your phone\nnumber to get started</string>
+    <string name="you_will_receive_a_verification_code">You will receive a verification code\nin Telegram app</string>
+    <string name="next">Next</string>
+    <string name="code_sent">Success!</string>
+    <string name="go">Go!</string>
 
     <string-array name="languages">
-        <item>english</item>
-        <item>russian</item>
+        <item>English</item>
+        <item>Русский</item>
     </string-array>
 
     <string name="find_the_best_apps_in_the_world">Find the best apps\n</string>
+    <string name="hello_words">Hi!\nYou can share apps with friends here!</string>
     <string-array name="type_of_apps">
         <item>in the world</item>
         <item>in %s</item>

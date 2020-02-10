@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
@@ -23,13 +23,32 @@
         <item name="android:windowTranslucentNavigation">true</item>
     </style>
 
-    <style name="DBToolbar">
+    <style name="Toolbar">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">?attr/actionBarSize</item>
         <item name="android:minHeight">?android:attr/actionBarSize</item>
         <item name="android:theme">@style/ToolbarTheme</item>
         <item name="layout_collapseMode">pin</item>
         <item name="popupTheme">@style/ThemeOverlay.AppCompat.Light</item>
+    </style>
+
+    <style name="Toolbar.Empty" parent="Toolbar">
+        <item name="android:layout_height">0dp</item>
+        <item name="android:minHeight">0dp</item>
+    </style>
+
+    <style name="HeaderTheme" parent="Base.TextAppearance.AppCompat.Headline">
+        <item name="android:textSize">28sp</item>
+        <item name="android:lineSpacingExtra">3sp</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:letterSpacing" tools:ignore="NewApi">0</item>
+    </style>
+
+    <style name="Text.Body" parent="Base.TextAppearance.AppCompat.Body1">
+        <item name="android:textSize">16sp</item>
+        <item name="android:lineSpacingExtra">4sp</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:letterSpacing" tools:ignore="NewApi">0.01</item>
     </style>
 
     <style name="ToolbarTheme" parent="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
@@ -39,6 +58,11 @@
 <!--        <item name="android:textSize">@dimen/text_size_16_normal</item>-->
         <item name="android:textStyle">bold</item>
         <item name="android:homeAsUpIndicator">@drawable/ic_arrow_back</item>
+    </style>
+
+    <style name="AppTheme.Picker" parent="Theme.AppCompat.Light.NoActionBar" >
+        <item name="android:textColorPrimary">@color/blue</item>
+        <item name="android:textSize">20dp</item>
     </style>
 
 </resources>
